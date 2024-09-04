@@ -68,5 +68,5 @@ O programa cria uma interface gráfica que permite enviar mensagens para um serv
 ## Referencias parciais
 - **Tkinter:** https://docs.python.org/pt-br/3/library/tkinter.html
 - **Threading:** https://docs.python.org/pt-br/3/library/threading.html
-- **Haslib:** https://pt.stackoverflow.com/questions/398124/como-criar-um-hash-usando-a-biblioteca-hashlib-usando-o-metodo-time-time-em
-- **Haslib:** https://docs.python.org/pt-br/3/library/hashlib.html
+- **Hashlib:** https://pt.stackoverflow.com/questions/398124/como-criar-um-hash-usando-a-biblioteca-hashlib-usando-o-metodo-time-time-em
+- **Hashlib:** https://docs.python.org/pt-br/3/library/hashlib.html
