@@ -1,5 +1,3 @@
-![image](https://github.com/user-attachments/assets/780a90db-292e-487a-bfa3-040713349e33)
-
 # Arquivos do trabalho de sockets
 
 ## Resumo de como funciona o programa
