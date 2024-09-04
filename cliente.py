@@ -3,11 +3,11 @@ Lucas Coutinho Nascimento
 Vinícius Siqueira Cardoso '''
 
 # Importação dos módulos necessários
-import socket
-import hashlib
-import tkinter as tk
+import socket # Módulo principal de comunicação de rede
+import hashlib # Funções de hash
+import tkinter as tk # Módulo para gerar interface gráfica
 from tkinter import scrolledtext
-import threading
+import threading # Módulo para gerenciamento de threads
 
 class ClienteApp:
     def __init__(self, root):
@@ -15,6 +15,7 @@ class ClienteApp:
         self.root.title("Cliente de Socket")
 
         # Configuração do layout
+        # Funcionalidade adicional
         self.mensagem_label = tk.Label(root, text="Digite a mensagem:")
         self.mensagem_label.pack(pady=5)
 
@@ -57,6 +58,7 @@ class ClienteApp:
             self.exibir_resposta(f"Mensagem enviada: {mensagem}")
 
     # Envia a resposta para a janela do tkinter
+    # Funcionalidade adicional
     def exibir_resposta(self, texto):
         self.resposta_text.config(state='normal')
         self.resposta_text.insert(tk.END, texto + '\n')

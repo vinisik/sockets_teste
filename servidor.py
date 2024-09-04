@@ -3,12 +3,12 @@ Lucas Coutinho Nascimento
 Vinícius Siqueira Cardoso '''
 
 # Importação dos módulos necessários
-import socket
-import hashlib
-import os
-import tkinter as tk
+import socket # Módulo principal de comunicação de rede
+import hashlib # Funções de hash
+import os # Módulo de comandos do sistema operacional
+import tkinter as tk # Módulo para gerar interface gráfica
 from tkinter import scrolledtext
-import threading
+import threading # Módulo para gerenciamento de threads
 
 class ServidorApp:
     def __init__(self, root):
@@ -35,6 +35,7 @@ class ServidorApp:
         self.thread.start()
 
     # Adiciona a mensagem à janela do tkinter
+    # Funcionalidade adicional
     def adicionar_mensagem(self, mensagem):
         self.mensagem_text.config(state='normal')
         self.mensagem_text.insert(tk.END, mensagem + '\n')
@@ -76,6 +77,7 @@ class ServidorApp:
                         response = "Falha na verificação de integridade da mensagem."
 
                     # Registrar a mensagem em um arquivo txt
+                    # Funcionalidade adicional
                     contador = self.contar_mensagens()
                     contador += 1
                     self.atualizar_contador(contador)
