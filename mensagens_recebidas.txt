@@ -1,0 +1,15 @@
+--------------------1--------------------
+Mensagem: Mensagem de teste
+Hash Recebido: 4449beea32141ebd982d823daa49a542
+Hash Calculado: 4449beea32141ebd982d823daa49a542
+Verificação: Bem-sucedida
+--------------------2--------------------
+Mensagem: sad
+Hash Recebido: 49f0bad299687c62334182178bfd75d8
+Hash Calculado: 49f0bad299687c62334182178bfd75d8
+Verificação: Bem-sucedida
+--------------------3--------------------
+Mensagem: bananinhja
+Hash Recebido: 1d3b366e864d9f780a7b750772a13509
+Hash Calculado: 1d3b366e864d9f780a7b750772a13509
+Verificação: Bem-sucedida
