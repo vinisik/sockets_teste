@@ -57,10 +57,9 @@ O programa cria uma interface gráfica que permite enviar mensagens para um serv
 
 
 ## Outros detalhes do programa
-## 1. Uso de Hashes
+##### 1. Uso de Hashes
 
-#### Integridade da Mensagem: 
-A função de hash hashlib.md5 é utilizada para calcular o hash MD5 da mensagem que o usuário deseja enviar ao servidor. Isso garante a integridade da mensagem, permitindo que o servidor verifique se a mensagem não foi alterada durante o trânsito. Ao enviar a mensagem junto com seu hash, o servidor pode recalcular o hash da mensagem recebida e compará-lo com o hash enviado, detectando possíveis modificações.
+- **Integridade da Mensagem:** A função de hash hashlib.md5 é utilizada para calcular o hash MD5 da mensagem que o usuário deseja enviar ao servidor. Isso garante a integridade da mensagem, permitindo que o servidor verifique se a mensagem não foi alterada durante o trânsito. Ao enviar a mensagem junto com seu hash, o servidor pode recalcular o hash da mensagem recebida e compará-lo com o hash enviado, detectando possíveis modificações.
 
-## 2. Uso do Threading
-#### Execução Paralela: O módulo threading é utilizado para executar a função iniciar_cliente em uma thread separada. Essa função é responsável por manter a conexão com o servidor e receber mensagens continuamente. Ao rodar essa função em uma thread separada, a interface gráfica do Tkinter (root.mainloop()) permanece responsiva, permitindo ao usuário interagir com a GUI enquanto as mensagens do servidor são recebidas em segundo plano. Sem o uso de threading, a interface gráfica poderia ficar bloqueada ou travar enquanto espera por mensagens do servidor.
+#### 2. Uso do Threading
+- **Execução Paralela:** O módulo threading é utilizado para executar a função iniciar_cliente em uma thread separada. Essa função é responsável por manter a conexão com o servidor e receber mensagens continuamente. Ao rodar essa função em uma thread separada, a interface gráfica do Tkinter (root.mainloop()) permanece responsiva, permitindo ao usuário interagir com a GUI enquanto as mensagens do servidor são recebidas em segundo plano. Sem o uso de threading, a interface gráfica poderia ficar bloqueada ou travar enquanto espera por mensagens do servidor.
