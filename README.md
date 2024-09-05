@@ -63,3 +63,10 @@ O programa cria uma interface gráfica que permite enviar mensagens para um serv
 
 #### 2. Uso do Threading
 - **Execução Paralela:** O módulo threading é utilizado para executar a função iniciar_cliente em uma thread separada. Essa função é responsável por manter a conexão com o servidor e receber mensagens continuamente. Ao rodar essa função em uma thread separada, a interface gráfica do Tkinter (root.mainloop()) permanece responsiva, permitindo ao usuário interagir com a GUI enquanto as mensagens do servidor são recebidas em segundo plano. Sem o uso de threading, a interface gráfica poderia ficar bloqueada ou travar enquanto espera por mensagens do servidor.
+
+
+## Referencias parciais
+- **Tkinter:** https://docs.python.org/pt-br/3/library/tkinter.html
+- **Threading:** https://docs.python.org/pt-br/3/library/threading.html
+- **Hashlib:** https://pt.stackoverflow.com/questions/398124/como-criar-um-hash-usando-a-biblioteca-hashlib-usando-o-metodo-time-time-em
+- **Hashlib:** https://docs.python.org/pt-br/3/library/hashlib.html
