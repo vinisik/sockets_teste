@@ -8,11 +8,12 @@ import hashlib # Funções de hash
 import tkinter as tk # Módulo para gerar interface gráfica
 from tkinter import scrolledtext
 import threading # Módulo para gerenciamento de threads
+from datetime import datetime
 
-class ClienteApp:
+class Cliente:
     def __init__(self, root):
         self.root = root
-        self.root.title("Cliente de Socket")
+        self.root.title("Socket - Cliente")
 
         # Configuração do layout
         # Funcionalidade adicional
@@ -49,16 +50,21 @@ class ClienteApp:
                 break
 
     def enviar_mensagem(self):
+        # Funcionalidade adicional (exibir horario)
+        hora = datetime.now()
+        hora_atual = hora.strftime("%H:%M:%S")
+        
         mensagem = self.mensagem_entry.get()
         if mensagem:
             # Calcula o hash MD5 da mensagem para garantir integridade
             mensagem_hash = hashlib.md5(mensagem.encode()).hexdigest()
             # Envia a mensagem e o hash MD5 ao servidor
             self.cliente_socket.send(f"{mensagem}|{mensagem_hash}".encode())
-            self.exibir_resposta(f"Mensagem enviada: {mensagem}")
+            self.exibir_resposta(f"Mensagem enviada: {mensagem}"
+                                 f"\nHora da mensagem: {hora_atual}")
 
     # Envia a resposta para a janela do tkinter
-    # Funcionalidade adicional
+    # Funcionalidade adicional (exibir janela)
     def exibir_resposta(self, texto):
         self.resposta_text.config(state='normal')
         self.resposta_text.insert(tk.END, texto + '\n')
@@ -67,5 +73,5 @@ class ClienteApp:
 
 if __name__ == "__main__":
     root = tk.Tk()
-    app = ClienteApp(root)
+    app = Cliente(root)
     root.mainloop()

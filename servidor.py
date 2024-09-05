@@ -9,11 +9,12 @@ import os # Módulo de comandos do sistema operacional
 import tkinter as tk # Módulo para gerar interface gráfica
 from tkinter import scrolledtext
 import threading # Módulo para gerenciamento de threads
+from datetime import datetime
 
-class ServidorApp:
+class Servidor:
     def __init__(self, root):
         self.root = root
-        self.root.title("Servidor de Socket")
+        self.root.title("Socket - Servidor")
 
         # Configuração do layout
         self.mensagem_text = scrolledtext.ScrolledText(root, width=60, height=20, state='disabled')
@@ -78,15 +79,19 @@ class ServidorApp:
 
                     # Registrar a mensagem em um arquivo txt
                     # Funcionalidade adicional
+                    hora = datetime.now()
+                    hora_atual = hora.strftime("%H:%M:%S")
+                    
                     contador = self.contar_mensagens()
                     contador += 1
                     self.atualizar_contador(contador)
-                    with open('mensagens_recebidas.txt', 'a', encoding='UTF8') as file:
+                    with open('mensagens_log.txt', 'a', encoding='UTF8') as file:
                         file.write(f'--------------------{contador}--------------------\n')
                         file.write(f"Mensagem: {mensagem}\n")
                         file.write(f"Hash Recebido: {hash_receb}\n")
                         file.write(f"Hash Calculado: {hash_calc}\n")
                         file.write(f"Verificação: {'Bem-sucedida' if hash_receb == hash_calc else 'Falha'}\n")
+                        file.write(f"Horário da mensagem: {hora_atual}\n")
 
                     # Enviar resposta ao cliente
                     con.send(response.encode())
@@ -106,8 +111,8 @@ class ServidorApp:
         # Atualiza o contador no arquivo
         with open('contador.txt', 'w') as file:
             file.write(str(contador))
-
+    
 if __name__ == "__main__":
     root = tk.Tk()
-    app = ServidorApp(root)
+    app = Servidor(root)
     root.mainloop()
