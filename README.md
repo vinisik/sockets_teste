@@ -1,8 +1,6 @@
-# Arquivos do trabalho de sockets
-
 ## Resumo de como funciona o programa
 ## Servidor
-O servidor cria uma interface gráfica para monitoramento e escuta conexões de clientes em uma porta específica. Quando um cliente envia uma mensagem, o servidor verifica a integridade da mensagem usando um hash MD5, registra a mensagem em um arquivo, atualiza um contador de mensagens, e responde ao cliente com o status da operação. Todo o processo de comunicação e registro é executado em paralelo com a interface gráfica, garantindo que o servidor continue responsivo.
+O servidor cria uma interface gráfica para monitoramento e escuta conexões de clientes em uma porta específica. Quando um dos clientes envia uma mensagem, o servidor verifica a integridade da mensagem usando um hash MD5, registra a mensagem em um arquivo, atualiza um contador de mensagens, e exibe a mensagem na interface do outro cliente, funcionando como uma espécie de chat utilizando protocolo TCP. Todo o processo de comunicação e registro é executado em paralelo com a interface gráfica, garantindo que o servidor continue responsivo.
 
 #### 1. Interface Gráfica
 - Utiliza o módulo **tkinter** para criar uma interface gráfica que exibe as mensagens recebidas dos clientes e outros eventos, como conexões e erros. A interface inclui uma área de texto **(ScrolledText)** onde essas informações são exibidas.
