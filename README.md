@@ -1,6 +1,6 @@
 ## Como executar corretamente
 - Primeiro executar o servidor.py
-- Deopois execute uma vez o cliente.py
+- Depois execute uma vez o cliente.py
 - Para abrir outro cliente, recomendo executar o comando python cliente.py diretamente do cmd, pra isso abra o caminho do arquivo antes
 
 ## Resumo de como funciona o programa
