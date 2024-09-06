@@ -1,3 +1,8 @@
+## Como executar corretamente
+- Primeiro executar o servidor.py
+- Deopois execute uma vez o cliente.py
+- Para abrir outro cliente, recomendo executar o comando python cliente.py diretamente do cmd, pra isso abra o caminho do arquivo antes
+
 ## Resumo de como funciona o programa
 ## Servidor
 O servidor cria uma interface gráfica para monitoramento e escuta conexões de clientes em uma porta específica. Quando um dos clientes envia uma mensagem, o servidor verifica a integridade da mensagem usando um hash MD5, registra a mensagem em um arquivo, atualiza um contador de mensagens, e exibe a mensagem na interface do outro cliente, funcionando como uma espécie de chat utilizando protocolo TCP. Todo o processo de comunicação e registro é executado em paralelo com a interface gráfica, garantindo que o servidor continue responsivo.
