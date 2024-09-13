@@ -21,12 +21,8 @@ class Cliente:
         # Campo para digitar a mensagem
         self.mensagem_label = tk.Label(root, text="Digite a mensagem:")
         self.mensagem_label.pack(pady=5)
-        
-        self.placeholder_text = "Digite sua mensagem aqui..."
+
         self.mensagem_entry = tk.Entry(root, width=50)
-        self.mensagem_entry.insert(0, self.placeholder_text)
-        self.mensagem_entry.bind("<FocusIn>", self.remove_placeholder)
-        self.mensagem_entry.bind("<FocusOut>", self.add_placeholder)
         self.mensagem_entry.pack(pady=5)
 
         # Botão para enviar a mensagem
@@ -87,7 +83,6 @@ class Cliente:
         self.resposta_text.insert(tk.END, texto + '\n')
         self.resposta_text.config(state='disabled')
         self.resposta_text.yview(tk.END)
-        self.mensagem_entry.insert(0, self.placeholder_text)
 
 
 if __name__ == "__main__":
