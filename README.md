@@ -83,3 +83,9 @@ O cliente cria uma interface gráfica que permite enviar mensagens para o servid
 
 #### 2. Uso de Threads:
 - **Execução Paralela**: O servidor e o cliente utilizam **threads** para executar operações de rede e manter a interface gráfica responsiva. Isso permite que o cliente e o servidor recebam e enviem mensagens sem bloquear a interface.
+
+## Referencias parciais
+- **Tkinter:** https://docs.python.org/pt-br/3/library/tkinter.html
+- **Threading:** https://docs.python.org/pt-br/3/library/threading.html
+- **Hashlib:** https://pt.stackoverflow.com/questions/398124/como-criar-um-hash-usando-a-biblioteca-hashlib-usando-o-metodo-time-time-em
+- **Hashlib:** https://docs.python.org/pt-br/3/library/hashlib.html
