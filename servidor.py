@@ -10,6 +10,8 @@ from tkinter import scrolledtext
 import threading # Módulo para gerenciamento de threads
 from datetime import datetime
 
+global hora_atual
+hora_atual = datetime.now().strftime("%H:%M")
 
 class Servidor:
     def __init__(self, root):
@@ -95,7 +97,6 @@ class Servidor:
     def registrar_mensagem(self, mensagem, hash_recebido, hash_calculado, verificado, cliente_id):
         # Funcionalidade adicional (registro de mensagens e hash em um arquivo de log)
         # Registra a mensagem no arquivo de log com detalhes da hash
-        hora_atual = datetime.now().strftime("%H:%M:%S")
         with open('mensagens_log.txt', 'a', encoding='UTF8') as file:
             file.write(f"Cliente {cliente_id} [{hora_atual}]\n")
             file.write(f"Mensagem: {mensagem}\n")

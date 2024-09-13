@@ -10,6 +10,8 @@ from tkinter import scrolledtext
 import threading # Módulo para gerenciamento de threads
 from datetime import datetime
 
+global hora 
+hora = datetime.now().strftime("%H:%M")
 
 class Cliente:
     def __init__(self, root):
@@ -57,13 +59,12 @@ class Cliente:
             try:
                 response = self.cliente_socket.recv(1024).decode()
                 if response:
-                    self.exibir_resposta(f"Mensagem recebida: {response}")
+                    self.exibir_resposta(f"Mensagem recebida: {response} - [{hora}]")
             except:
                 break
 
     def enviar_mensagem(self):
         # Envia a mensagem com o hash MD5 para o servidor
-        hora = datetime.now().strftime("%H:%M:%S")
         mensagem = self.mensagem_entry.get()
         if mensagem:
             # Calcula o hash MD5 da mensagem
@@ -71,7 +72,7 @@ class Cliente:
             mensagem_completa = f"{mensagem}|{hash_md5}"
             self.cliente_socket.send(mensagem_completa.encode())
             # Exibe a mensagem enviada na interface
-            self.exibir_resposta(f"Você: {mensagem}")
+            self.exibir_resposta(f"Você: {mensagem} - [{hora}]")
 
     def exibir_resposta(self, texto):
         # Exibe as mensagens recebidas na área de texto
