@@ -10,8 +10,9 @@ from tkinter import scrolledtext
 import threading # Módulo para gerenciamento de threads
 from datetime import datetime
 
+# Variável global para registrar o horário da mensagem
 global hora_atual
-hora_atual = datetime.now().strftime("%H:%M")
+hora_atual = datetime.now().strftime("%H:%M:%S")
 
 class Servidor:
     def __init__(self, root):
@@ -28,6 +29,10 @@ class Servidor:
         self.clientes = []
         # Contador para identificar cada cliente que se conecta
         self.cliente_id = 0
+        
+        # Contador para registrar a quantidade de mensagens no arquivo de log
+        self.contador_mensagens = 0
+        
         self.iniciar_servidor()
 
     def iniciar_servidor(self):
@@ -73,6 +78,9 @@ class Servidor:
 
                     # Verifica a integridade da mensagem comparando os hashes
                     verificado = "Bem-sucedida" if hash_recebido == hash_calculado else "Falha"
+                    
+                    # Incrementa o contador de mensagens
+                    self.contador_mensagens += 1
 
                     # Registra a mensagem no log
                     self.registrar_mensagem(mensagem, hash_recebido, hash_calculado, verificado, cliente_id)
@@ -95,14 +103,16 @@ class Servidor:
                     self.clientes.remove((cliente, id_cliente))
 
     def registrar_mensagem(self, mensagem, hash_recebido, hash_calculado, verificado, cliente_id):
+        total_mensagens = self.contador_mensagens
         # Funcionalidade adicional (registro de mensagens e hash em um arquivo de log)
         # Registra a mensagem no arquivo de log com detalhes da hash
         with open('mensagens_log.txt', 'a', encoding='UTF8') as file:
-            file.write(f"Cliente {cliente_id} [{hora_atual}]\n")
+            file.write(f" {self.contador_mensagens}. [{hora_atual}] Cliente {cliente_id}\n")
             file.write(f"Mensagem: {mensagem}\n")
             file.write(f"Hash Recebido: {hash_recebido}\n")
             file.write(f"Hash Calculado: {hash_calculado}\n")
             file.write(f"Verificação: {verificado}\n")
+            file.write(f"Total de mensagens: {total_mensagens}\n")
             file.write("-------------------------\n")
 
     def adicionar_mensagem(self, mensagem):

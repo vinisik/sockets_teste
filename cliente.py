@@ -59,7 +59,7 @@ class Cliente:
             try:
                 response = self.cliente_socket.recv(1024).decode()
                 if response:
-                    self.exibir_resposta(f"Mensagem recebida: {response} - [{hora}]")
+                    self.exibir_resposta(f"[{hora}] Mensagem recebida: {response}")
             except:
                 break
 
@@ -72,7 +72,7 @@ class Cliente:
             mensagem_completa = f"{mensagem}|{hash_md5}"
             self.cliente_socket.send(mensagem_completa.encode())
             # Exibe a mensagem enviada na interface
-            self.exibir_resposta(f"Você: {mensagem} - [{hora}]")
+            self.exibir_resposta(f"[{hora}] Você: {mensagem}")
 
     def exibir_resposta(self, texto):
         # Exibe as mensagens recebidas na área de texto
