@@ -1,72 +1,78 @@
+Este é um projeto de chat que utiliza comunicação **TCP/IP** entre um servidor e vários clientes. A interface gráfica é implementada usando **Tkinter**, e a integridade das mensagens é garantida pelo uso de hashes **MD5**.
+
 ## Como executar corretamente
 - Primeiro executar o servidor.py
 - Depois execute uma vez o cliente.py
-- Para abrir outro cliente, recomendo executar o comando python cliente.py diretamente do cmd, pra isso abra o caminho do arquivo antes
+- Para abrir outros clientes, execute o comando `python cliente.py` diretamente pelo terminal ou CMD.
+  ```bash
+      python cliente.py
+  ``` 
+---
 
 ## Resumo de como funciona o programa
-## Servidor
-O servidor cria uma interface gráfica para monitoramento e escuta conexões de clientes em uma porta específica. Quando um dos clientes envia uma mensagem, o servidor verifica a integridade da mensagem usando um hash MD5, registra a mensagem em um arquivo, atualiza um contador de mensagens, e exibe a mensagem na interface do outro cliente, funcionando como uma espécie de chat utilizando protocolo TCP. Todo o processo de comunicação e registro é executado em paralelo com a interface gráfica, garantindo que o servidor continue responsivo.
 
-#### 1. Interface Gráfica
-- Utiliza o módulo **tkinter** para criar uma interface gráfica que exibe as mensagens recebidas dos clientes e outros eventos, como conexões e erros. A interface inclui uma área de texto **(ScrolledText)** onde essas informações são exibidas.
+### Servidor
 
-#### 2. Iniciar Servidor
-- O servidor é iniciado ao criar um socket **TCP** que escuta por conexões na **localhost** na porta **12345**.
-- O servidor entra em modo de escuta (listen) e aguarda conexões de clientes. Este processo é executado em uma thread separada para que a interface gráfica continue responsiva.
-
-#### 3. Aceitar Conexões
-- A função aceitar_conexoes é executada em uma thread separada. Ela aceita conexões de clientes e cria um novo socket para se comunicar com cada cliente.
-- Quando um cliente se conecta, o servidor exibe o endereço do cliente na interface gráfica.
-
-#### 4. Receber e Verificar Mensagens:
-- O servidor recebe dados (mensagens) dos clientes em pacotes de até 1024 bytes.
-- A mensagem recebida é dividida em duas partes: o texto da mensagem e o hash MD5 que o cliente enviou junto.
-- O servidor recalcula o hash MD5 da mensagem recebida e o compara com o hash enviado pelo cliente para verificar se a mensagem chegou sem alterações.
-
-#### 5. Registro de Mensagens:
-- Se a verificação de integridade for bem-sucedida, o servidor registra a mensagem em um arquivo de texto (mensagens_recebidas.txt), incluindo detalhes como a mensagem, os hashes recebidos e calculados, e o resultado da verificação.
-- O servidor também mantém um contador de mensagens, que é atualizado e salvo em um arquivo separado (contador.txt).
-
-#### 6. Resposta ao Cliente:
-- Após verificar a integridade da mensagem e registrá-la, o servidor envia uma resposta ao cliente, indicando se a mensagem foi recebida com sucesso ou se houve falha na verificação de integridade.
-
-#### 7. Manipulação de Erros:
-- Caso ocorra algum erro durante a comunicação com o cliente, o servidor captura a exceção, exibe uma mensagem na interface gráfica, e continua a operação.
-
-
-## Cliente
-O programa cria uma interface gráfica que permite enviar mensagens para um servidor TCP. Ele usa threading para manter a interface responsiva enquanto o cliente se comunica com o servidor. As mensagens são enviadas junto com um hash MD5 para garantir sua integridade. As respostas do servidor são exibidas na interface gráfica em tempo real.
+O servidor cria uma interface gráfica que permite monitorar conexões e mensagens recebidas de clientes. Ele escuta na porta **12345** e utiliza o protocolo **TCP**. Quando um cliente envia uma mensagem, o servidor verifica sua integridade usando **MD5**, armazena a mensagem em um log e distribui para os demais clientes conectados, funcionando como um chat em rede.
 
 #### 1. Interface Gráfica:
-- A interface gráfica é criada utilizando o módulo tkinter. Ela inclui um campo para digitar a mensagem, um botão para enviar a mensagem, e uma área de texto para exibir as respostas recebidas do servidor.
+- A interface gráfica, criada com **Tkinter**, exibe mensagens e eventos (como conexões) em uma área de texto **ScrolledText**.
+
+#### 2. Iniciar Servidor:
+- O servidor inicia criando um socket **TCP** que escuta na porta **12345** do **localhost**.
+- A função de escuta roda em uma **thread separada**, mantendo a interface gráfica responsiva.
+
+#### 3. Aceitar Conexões:
+- O servidor aceita conexões de clientes e cria um socket dedicado para cada um.
+- Cada cliente recebe um **ID único**, e essa informação é exibida na interface gráfica do servidor.
+
+#### 4. Receber e Verificar Mensagens:
+- As mensagens enviadas pelos clientes incluem um hash **MD5** da mensagem.
+- O servidor verifica a integridade da mensagem recalculando o hash e comparando com o hash recebido.
+
+#### 5. Registro de Mensagens:
+- Mensagens válidas são registradas em um arquivo de log (`mensagens_log.txt`), juntamente com os detalhes dos hashes, do ID do cliente e horário.
+
+#### 6. Distribuir Mensagens:
+- O servidor distribui as mensagens recebidas para todos os outros clientes conectados, exceto para o cliente que enviou a mensagem originalmente.
+
+#### 7. Tratamento de Erros:
+- O servidor lida com erros de comunicação, removendo clientes desconectados sem interromper sua operação.
+
+---
+
+### Cliente
+
+O cliente cria uma interface gráfica que permite enviar mensagens para o servidor e receber mensagens de outros clientes conectados. As mensagens são enviadas com um hash **MD5** para garantir integridade, e as respostas do servidor são exibidas em tempo real.
+
+#### 1. Interface Gráfica:
+- A GUI, feita com **Tkinter**, contém um campo para o usuário digitar mensagens, um botão de envio, e uma área de texto **ScrolledText** para exibir mensagens recebidas.
 
 #### 2. Iniciar Cliente:
-- Ao iniciar o programa, um socket TCP é criado em uma thread separada. Essa thread executa a função iniciar_cliente, que conecta o cliente a um servidor rodando no localhost na porta 12345.
-- A thread permite que a interface gráfica permaneça responsiva enquanto o cliente aguarda mensagens do servidor.
+- O cliente se conecta ao servidor na **localhost** (127.0.0.1) na porta **12345**.
+- Um **ID único** é atribuído ao cliente pelo servidor e exibido na interface gráfica.
 
 #### 3. Enviar Mensagem:
-- Quando o usuário digita uma mensagem e clica no botão "Enviar", a função enviar_mensagem é chamada.
-- A mensagem é concatenada com um hash MD5 gerado a partir da própria mensagem. O hash garante a integridade da mensagem, permitindo que o servidor verifique se ela não foi alterada durante o envio.
-- A mensagem e o hash são enviados ao servidor via socket.
+- Quando o usuário envia uma mensagem, o cliente calcula o hash **MD5** e envia tanto a mensagem quanto o hash ao servidor.
 
-#### 4. Receber Resposta:
-- A função iniciar_cliente, em execução na thread separada, fica continuamente esperando por respostas do servidor.
-- Quando uma resposta é recebida, ela é exibida na área de texto da interface gráfica.
+#### 4. Receber Respostas:
+- O cliente usa uma **thread separada** para monitorar mensagens recebidas do servidor em tempo real.
 
-#### 5. Exibição de Respostas:
-- As respostas do servidor são exibidas na área de texto (ScrolledText), e a interface é atualizada automaticamente para mostrar as novas mensagens recebidas.
+#### 5. Exibir Mensagens:
+- As mensagens recebidas do servidor são exibidas na área de texto da GUI do cliente.
 
+#### 6. Registro em log:
+- As mensagens são registradas no arquivo de log (`mensagens_log.txt`).
 
-
+---
 
 ## Outros detalhes do programa
-##### 1. Uso de Hashes
 
-- **Integridade da Mensagem:** A função de hash hashlib.md5 é utilizada para calcular o hash MD5 da mensagem que o usuário deseja enviar ao servidor. Isso garante a integridade da mensagem, permitindo que o servidor verifique se a mensagem não foi alterada durante o trânsito. Ao enviar a mensagem junto com seu hash, o servidor pode recalcular o hash da mensagem recebida e compará-lo com o hash enviado, detectando possíveis modificações.
+#### 1. Uso de Hashes:
+- **Integridade da Mensagem**: As mensagens enviadas pelos clientes incluem um hash **MD5**. O servidor recalcula o hash para garantir que a mensagem não foi alterada durante o envio.
 
-#### 2. Uso do Threading
-- **Execução Paralela:** O módulo threading é utilizado para executar a função iniciar_cliente em uma thread separada. Essa função é responsável por manter a conexão com o servidor e receber mensagens continuamente. Ao rodar essa função em uma thread separada, a interface gráfica do Tkinter (root.mainloop()) permanece responsiva, permitindo ao usuário interagir com a GUI enquanto as mensagens do servidor são recebidas em segundo plano. Sem o uso de threading, a interface gráfica poderia ficar bloqueada ou travar enquanto espera por mensagens do servidor.
-
+#### 2. Uso de Threads:
+- **Execução Paralela**: O servidor e o cliente utilizam **threads** para executar operações de rede e manter a interface gráfica responsiva. Isso permite que o cliente e o servidor recebam e enviem mensagens sem bloquear a interface.
 
 ## Referencias parciais
 - **Tkinter:** https://docs.python.org/pt-br/3/library/tkinter.html
