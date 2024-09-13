@@ -41,7 +41,7 @@ O servidor cria uma interface gráfica que permite monitorar conexões e mensage
 - O servidor verifica a integridade da mensagem recalculando o hash e comparando com o hash recebido.
 
 #### 5. Registro de Mensagens:
-- Mensagens válidas são registradas em um arquivo de log (`mensagens_log.txt`), juntamente com os detalhes dos hashes e do ID do cliente.
+- Mensagens válidas são registradas em um arquivo de log (`mensagens_log.txt`), juntamente com os detalhes dos hashes, do ID do cliente e horário.
 
 #### 6. Distribuir Mensagens:
 - O servidor distribui as mensagens recebidas para todos os outros clientes conectados, exceto para o cliente que enviou a mensagem originalmente.
@@ -70,6 +70,9 @@ O cliente cria uma interface gráfica que permite enviar mensagens para o servid
 
 #### 5. Exibir Mensagens:
 - As mensagens recebidas do servidor são exibidas na área de texto da GUI do cliente.
+
+#### 6. Registro em log:
+- As mensagens são registradas no arquivo de log (`mensagens_log.txt`).
 
 ---
 
