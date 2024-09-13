@@ -10,10 +10,6 @@ from tkinter import scrolledtext
 import threading # Módulo para gerenciamento de threads
 from datetime import datetime
 
-# Variável global para registrar o horário da mensagem
-global hora_atual
-hora_atual = datetime.now().strftime("%H:%M:%S")
-
 class Servidor:
     def __init__(self, root):
         # Funcionalidade adicional (interface para enviar e receber mensagens)
@@ -32,6 +28,9 @@ class Servidor:
         
         # Contador para registrar a quantidade de mensagens no arquivo de log
         self.contador_mensagens = 0
+        
+        # Variável para registrar o horário da mensagem
+        self.hora_atual = datetime.now().strftime("%H:%M:%S")
         
         self.iniciar_servidor()
 
@@ -103,16 +102,14 @@ class Servidor:
                     self.clientes.remove((cliente, id_cliente))
 
     def registrar_mensagem(self, mensagem, hash_recebido, hash_calculado, verificado, cliente_id):
-        total_mensagens = self.contador_mensagens
         # Funcionalidade adicional (registro de mensagens e hash em um arquivo de log)
         # Registra a mensagem no arquivo de log com detalhes da hash
         with open('mensagens_log.txt', 'a', encoding='UTF8') as file:
-            file.write(f" {self.contador_mensagens}. [{hora_atual}] Cliente {cliente_id}\n")
+            file.write(f" {self.contador_mensagens}. [{self.hora_atual}] Cliente {cliente_id}\n")
             file.write(f"Mensagem: {mensagem}\n")
             file.write(f"Hash Recebido: {hash_recebido}\n")
             file.write(f"Hash Calculado: {hash_calculado}\n")
             file.write(f"Verificação: {verificado}\n")
-            file.write(f"Total de mensagens: {total_mensagens}\n")
             file.write("-------------------------\n")
 
     def adicionar_mensagem(self, mensagem):

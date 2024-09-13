@@ -10,9 +10,6 @@ from tkinter import scrolledtext
 import threading # Módulo para gerenciamento de threads
 from datetime import datetime
 
-global hora 
-hora = datetime.now().strftime("%H:%M")
-
 class Cliente:
     def __init__(self, root):
         # Inicializa a interface do cliente e configura o layout
@@ -39,6 +36,8 @@ class Cliente:
         # Socket para comunicação com o servidor
         self.cliente_socket = None
         threading.Thread(target=self.iniciar_cliente).start()
+        
+        self.hora = datetime.now().strftime("%H:%M")
 
     def iniciar_cliente(self):
         # Inicializa o socket e conecta ao servidor
@@ -59,7 +58,7 @@ class Cliente:
             try:
                 response = self.cliente_socket.recv(1024).decode()
                 if response:
-                    self.exibir_resposta(f"[{hora}] Mensagem recebida: {response}")
+                    self.exibir_resposta(f"[{self.hora}] Mensagem recebida: {response}")
             except:
                 break
 
@@ -72,7 +71,10 @@ class Cliente:
             mensagem_completa = f"{mensagem}|{hash_md5}"
             self.cliente_socket.send(mensagem_completa.encode())
             # Exibe a mensagem enviada na interface
-            self.exibir_resposta(f"[{hora}] Você: {mensagem}")
+            self.exibir_resposta(f"[{self.hora}] Você: {mensagem}")
+            
+            # Limpa o campo de texto ao enviar a mensagem
+            self.mensagem_entry.delete(0, tk.END)
 
     def exibir_resposta(self, texto):
         # Exibe as mensagens recebidas na área de texto
