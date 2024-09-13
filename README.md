@@ -1,10 +1,18 @@
 Este é um projeto de chat que utiliza comunicação **TCP/IP** entre um servidor e vários clientes. A interface gráfica é implementada usando **Tkinter**, e a integridade das mensagens é garantida pelo uso de hashes **MD5**.
 
 ## Como executar corretamente
+- Primeiro executar o servidor.py
+- Depois execute uma vez o cliente.py
+- Para abrir outros clientes, execute o comando `python cliente.py` diretamente pelo terminal ou CMD.
+  ```bash
+      python cliente.py
+  ``` 
+
+## Como executar corretamente
 
 1. **Execute o servidor**:
-    - Pode ser executado pelo vscode 
     - Primeiro, execute o arquivo `servidor.py`:
+    - - Pode ser executado diretamente pelo vscode 
       ```bash
       python servidor.py
       ```
@@ -15,7 +23,7 @@ Este é um projeto de chat que utiliza comunicação **TCP/IP** entre um servido
       python cliente.py
       ```
 4. **Abrir mais clientes**:
-    - Para abrir outros clientes, execute o comando `python cliente.py` diretamente pelo terminal ou CMD. Verifique se você está no diretório correto.
+    - Para abrir outros clientes, execute o comando `python cliente.py` diretamente pelo terminal ou CMD. 
 
 ---
 
