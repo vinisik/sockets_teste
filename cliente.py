@@ -37,6 +37,7 @@ class Cliente:
         self.cliente_socket = None
         threading.Thread(target=self.iniciar_cliente).start()
         
+        # Variável para registrar o horário da mensagem
         self.hora = datetime.now().strftime("%H:%M")
 
     def iniciar_cliente(self):
