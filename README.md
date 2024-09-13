@@ -7,24 +7,6 @@ Este é um projeto de chat que utiliza comunicação **TCP/IP** entre um servido
   ```bash
       python cliente.py
   ``` 
-
-## Como executar corretamente
-
-1. **Execute o servidor**:
-    - Primeiro, execute o arquivo `servidor.py`:
-    - - Pode ser executado diretamente pelo vscode 
-      ```bash
-      python servidor.py
-      ```
-3. **Execute o cliente**:
-    - Em seguida, execute o arquivo `cliente.py`:
-    - Pode ser executado pelo vscode
-      ```bash
-      python cliente.py
-      ```
-4. **Abrir mais clientes**:
-    - Para abrir outros clientes, execute o comando `python cliente.py` diretamente pelo terminal ou CMD. 
-
 ---
 
 ## Resumo de como funciona o programa
